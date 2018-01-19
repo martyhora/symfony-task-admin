@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{%  block content %}
+    <h1>Tasks of project {{ project.name }}</h1>
+
+    <a class="btn btn-info" style="margin-bottom: 1em" href={{ path('addTask', { 'projectId': project.id }) }}>
+        Add task
+    </a>
+
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Project name</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        {% for task in tasks %}
+            <tr>
+                <td>{{ task.id }}</td>
+                <td>{{ task.project.name }}</td>
+                <td>{{ task.name }}</td>
+                <td>
+                    <a href={{ path('editTask', { 'id': task.id }) }}>
+                        <span class="oi oi-pencil" title="icon name" aria-hidden="true"></span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
