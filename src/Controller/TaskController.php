@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class TaskController extends Controller
 {
@@ -54,15 +55,16 @@ class TaskController extends Controller
 
         return $this->render('task/add.html.twig', [
             'form' => $form->createView(),
+            'project' => $project,
         ]);
     }
 
     /**
      * @Route("/task/edit/{id}", requirements={"id": "\d+"}, name="editTask")
      */
-    public function edit(Request $request, Task $project): Response
+    public function edit(Request $request, Task $task): Response
     {
-        $form = $this->createForm(TaskForm::class, $project);
+        $form = $this->createForm(TaskForm::class, $task);
 
         $form->handleRequest($request);
 
@@ -76,6 +78,7 @@ class TaskController extends Controller
 
         return $this->render('task/add.html.twig', [
             'form' => $form->createView(),
+            'project' => $task->getProject(),
         ]);
     }
 }

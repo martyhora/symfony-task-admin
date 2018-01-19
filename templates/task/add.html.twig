@@ -2,7 +2,13 @@
 
 {%  block content %}
 
-    <h1>Edit task</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1em;">
+        <h1>Edit task</h1>
+
+        <a class="btn btn-danger" href={{ path('task', { 'projectId': project.id }) }}>
+            Back to tasks
+        </a>
+    </div>
 
     {{ form_start(form) }}
     {{ form_widget(form) }}

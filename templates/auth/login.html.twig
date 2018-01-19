@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{%  block content %}
+    <div style="position: fixed; height: 100%; width: 100%; top: 0; left: 0;">
+    <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+        <div style="min-width: 20%;" class="card text-center">
+            <div class="card-header" style="background-color: #17a2b8; color: #fff;">
+                Login
+            </div>
+            <div class="card-block" style="padding: 1em">
+                {% if error %}
+                    <div class="alert alert-danger">
+                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                    </div>
+                {% endif %}
+
+                <form action="{{ path('login') }}" method="post">
+                    <div class="form-group">
+                        <label class="control-label required" for="username">Username</label>
+                        <input type="text" id="username" name="_username" required="required" autofocus="autofocus" class="form-control" value="{{ lastUsername }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label required" for="username">Password</label>
+                        <input type="password" id="password" name="_password" required="required" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" id="login_button" name="login_button" class="btn btn-success btn btn-block">Login</button>
+                    </div>
+
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{%  endblock %}

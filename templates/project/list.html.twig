@@ -2,11 +2,13 @@
 
 {%  block content %}
 
-    <h1>Projects</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1em;">
+        <h1>Projects</h1>
 
-    <a class="btn btn-info" style="margin-bottom: 1em" href={{ path('addProject') }}>
-        Add project
-    </a>
+        <a class="btn btn-info" href={{ path('addProject') }}>
+            Add project
+        </a>
+    </div>
 
     <table class="table">
         <tr>
@@ -19,12 +21,14 @@
                 <td>{{ project.id }}</td>
                 <td>{{ project.name }}</td>
                 <td>
-                    <a href={{ path('editProject', { 'id': project.id }) }}>
-                        <span class="oi oi-pencil" title="icon name" aria-hidden="true"></span>
-                    </a>
-                    <a href={{ path('task', { 'projectId': project.id }) }}>
-                        <span class="oi oi-list" title="icon name" aria-hidden="true"></span>
-                    </a>
+                    <div style="display: flex; justify-content: center">
+                        <a style="display: block; margin: 0 5px;" href={{ path('editProject', { 'id': project.id }) }}>
+                            <span class="oi oi-pencil" title="Edit project" aria-hidden="true"></span>
+                        </a>
+                        <a style="display: block; margin: 0 5px;" href={{ path('task', { 'projectId': project.id }) }}>
+                            <span class="oi oi-list" title="Show project tasks" aria-hidden="true"></span>
+                        </a>
+                    </div>
                 </td>
             </tr>
         {% endfor %}

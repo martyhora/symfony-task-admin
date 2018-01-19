@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {%  block content %}
-    <h1>Tasks of project {{ project.name }}</h1>
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1em;">
+        <h1>Tasks of project {{ project.name }}</h1>
 
-    <a class="btn btn-info" style="margin-bottom: 1em" href={{ path('addTask', { 'projectId': project.id }) }}>
-        Add task
-    </a>
+        <a class="btn btn-info" href={{ path('addTask', { 'projectId': project.id }) }}>
+            Add task
+        </a>
+    </div>
 
     <table class="table">
         <tr>
@@ -21,7 +23,7 @@
                 <td>{{ task.name }}</td>
                 <td>
                     <a href={{ path('editTask', { 'id': task.id }) }}>
-                        <span class="oi oi-pencil" title="icon name" aria-hidden="true"></span>
+                        <span class="oi oi-pencil" title="Edit task" aria-hidden="true"></span>
                     </a>
                 </td>
             </tr>

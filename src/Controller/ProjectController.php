@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Entity\User;
 use App\Form\ProjectForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class ProjectController extends Controller
 {
