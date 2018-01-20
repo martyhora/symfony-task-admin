@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{%  block content %}
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1em;">
+        <h1>{{ task.name }}</h1>
+
+        <a class="btn btn-danger" href={{ path('task', { 'projectId': task.project.id }) }}>
+            Back to tasks
+        </a>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>Project</th>
+            <td>{{ task.project.name }}</td>
+        </tr>
+        <tr>
+            <th>Asignee</th>
+            <td>{{ task.user.username }}</td>
+        </tr>
+        <tr>
+            <th>State</th>
+            <td>
+                <span class="badge badge-{{ task.state.color.name }}">
+                    {{ task.state.name }}
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ task.description }}</td>
+        </tr>
+        <tr>
+            <th>Created</th>
+            <td>{{ task.created|date('j.n.Y') }}</td>
+        </tr>
+    </table>
+
+    <h2 style="margin-bottom: 1em; text-align: left;">Comments</h2>
+
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+
+    {% for comment in task.comments %}
+        <div class="card" style="margin-bottom: 1em;">
+            <div class="card-header"
+                 style="display: flex; justify-content: space-between; background-color: #17a2b8; color: #fff;">
+                <div>{{ comment.user.username }}</div>
+                <div>{{ comment.created|date('j.n.Y') }}</div>
+            </div>
+            <div class="card-block" style="padding: 1em; text-align: left;">
+                {{ comment.text }}
+            </div>
+        </div>
+    {% endfor  %}
+
+{%  endblock %}

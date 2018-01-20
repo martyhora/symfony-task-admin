@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{%  block content %}
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1em;">
+        <h1>States</h1>
+
+        <a class="btn btn-info" href={{ path('addState') }}>
+            Add state
+        </a>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        {% for state in states %}
+            <tr>
+                <td>{{ state.id }}</td>
+                <td>
+                    <span class="badge badge-{{ state.color.name }}">
+                        {{ state.name }}
+                    </span>
+                </td>
+                <td>
+                    <a style="display: block; margin: 0 5px;" href={{ path('editState', { 'id': state.id }) }}>
+                        <span class="oi oi-pencil" title="Edit state" aria-hidden="true"></span>
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

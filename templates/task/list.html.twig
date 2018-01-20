@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{%  block content %}
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1em;">
+        <h1>Tasks of project {{ project.name }}</h1>
+
+        <a class="btn btn-info" href={{ path('addTask', { 'projectId': project.id }) }}>
+            Add task
+        </a>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Assignee</th>
+                <th>State</th>
+                <th>Project name</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.id }}</td>
+                    <td>
+                        <a href={{ path('taskDetail', { 'id': task.id }) }}>
+                            {{ task.name }}
+                        </a>
+                    </td>
+                    <td>{{ task.user.username }}</td>
+                    <td>
+                        <span class="badge badge-{{ task.state.color.name }}">
+                            {{ task.state.name }}
+                        </span>
+                    </td>
+                    <td>{{ task.project.name }}</td>
+                    <td>{{ task.created|date('j.n.Y') }}</td>
+                    <td>
+                        <a href={{ path('editTask', { 'id': task.id }) }}>
+                            <span class="oi oi-pencil" title="Edit task" aria-hidden="true"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
