@@ -7,6 +7,7 @@ use App\Entity\Project;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TaskRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Task
 {
@@ -23,13 +24,34 @@ class Task
     private $name;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $description;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="tasks")
      * @ORM\JoinColumn(nullable=false)
      */
     private $project;
 
     /**
-     * @return mixed
+     * @var \DateTime
+     *
+     * @ORM\Column(name="created", type="datetime")
+     */
+    private $created;
+
+    /**
+     * Triggered on insert
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->created = new \DateTime("now");
+    }
+
+    /**
+     * @return int
      */
     public function getId()
     {
@@ -37,15 +59,15 @@ class Task
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      */
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -53,15 +75,15 @@ class Task
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      */
-    public function setName($name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
     /**
-     * @return mixed
+     * @return Project
      */
     public function getProject()
     {
@@ -71,8 +93,40 @@ class Task
     /**
      * @param mixed $project
      */
-    public function setProject($project): void
+    public function setProject(Project $project): void
     {
         $this->project = $project;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription(string $description): void
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getCreated(): \DateTime
+    {
+        return $this->created;
+    }
+
+    /**
+     * @param \DateTime $created
+     */
+    public function setCreated(\DateTime $created): void
+    {
+        $this->created = $created;
     }
 }

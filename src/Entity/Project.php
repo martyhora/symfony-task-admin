@@ -59,7 +59,7 @@ class Project
     }
 
     /**
-     * @return mixed
+     * @return int
      */
     public function getId()
     {
@@ -67,7 +67,7 @@ class Project
     }
 
     /**
-     * @param mixed $id
+     * @param int $id
      */
     public function setId($id): void
     {
@@ -75,7 +75,7 @@ class Project
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName()
     {
@@ -83,7 +83,7 @@ class Project
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      */
     public function setName($name): void
     {
