@@ -14,8 +14,9 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Project name</th>
                 <th>Assignee</th>
+                <th>State</th>
+                <th>Project name</th>
                 <th>Created</th>
                 <th>Actions</th>
             </tr>
@@ -29,8 +30,9 @@
                             {{ task.name }}
                         </a>
                     </td>
-                    <td>{{ task.project.name }}</td>
                     <td>{{ task.user.username }}</td>
+                    <td>{{ task.state.name }}</td>
+                    <td>{{ task.project.name }}</td>
                     <td>{{ task.created|date('j.n.Y') }}</td>
                     <td>
                         <a href={{ path('editTask', { 'id': task.id }) }}>

@@ -40,6 +40,11 @@ class Task
     private $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="State", inversedBy="tasks")
+     */
+    private $state;
+
+    /**
      * @ORM\OneToMany(targetEntity="Comment", mappedBy="task")
      */
     private $comments;
@@ -170,5 +175,21 @@ class Task
     public function setComments($comments): void
     {
         $this->comments = $comments;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param mixed $state
+     */
+    public function setState($state): void
+    {
+        $this->state = $state;
     }
 }
