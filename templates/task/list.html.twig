@@ -31,7 +31,11 @@
                         </a>
                     </td>
                     <td>{{ task.user.username }}</td>
-                    <td>{{ task.state.name }}</td>
+                    <td>
+                        <span class="badge badge-{{ task.state.color.name }}">
+                            {{ task.state.name }}
+                        </span>
+                    </td>
                     <td>{{ task.project.name }}</td>
                     <td>{{ task.created|date('j.n.Y') }}</td>
                     <td>

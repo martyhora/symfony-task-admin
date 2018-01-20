@@ -21,11 +21,19 @@
         </tr>
         <tr>
             <th>State</th>
-            <td>{{ task.state.name }}</td>
+            <td>
+                <span class="badge badge-{{ task.state.color.name }}">
+                    {{ task.state.name }}
+                </span>
+            </td>
         </tr>
         <tr>
             <th>Description</th>
             <td>{{ task.description }}</td>
+        </tr>
+        <tr>
+            <th>Created</th>
+            <td>{{ task.created|date('j.n.Y') }}</td>
         </tr>
     </table>
 

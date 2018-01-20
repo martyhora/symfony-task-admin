@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\StateRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ColorRepository")
  */
-class State
+class Color
 {
     /**
      * @ORM\Id
@@ -22,14 +22,9 @@ class State
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="state")
+     * @ORM\OneToMany(targetEntity="App\Entity\State", mappedBy="color")
      */
-    private $tasks;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Color", inversedBy="states")
-     */
-    private $color;
+    private $states;
 
     /**
      * @return mixed
@@ -66,32 +61,16 @@ class State
     /**
      * @return mixed
      */
-    public function getTasks()
+    public function getStates()
     {
-        return $this->tasks;
+        return $this->states;
     }
 
     /**
-     * @param mixed $tasks
+     * @param mixed $states
      */
-    public function setTasks($tasks): void
+    public function setStates($states): void
     {
-        $this->tasks = $tasks;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getColor()
-    {
-        return $this->color;
-    }
-
-    /**
-     * @param mixed $color
-     */
-    public function setColor($color): void
-    {
-        $this->color = $color;
+        $this->states = $states;
     }
 }

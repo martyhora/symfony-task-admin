@@ -19,7 +19,11 @@
         {% for state in states %}
             <tr>
                 <td>{{ state.id }}</td>
-                <td>{{ state.name }}</td>
+                <td>
+                    <span class="badge badge-{{ state.color.name }}">
+                        {{ state.name }}
+                    </span>
+                </td>
                 <td>
                     <div style="display: flex; justify-content: center">
                         <a style="display: block; margin: 0 5px;" href={{ path('editState', { 'id': state.id }) }}>
