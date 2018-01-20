@@ -18,6 +18,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -62,6 +63,11 @@ class User implements UserInterface
      */
     private $tasks;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user")
+     */
+    private $comments;
+
     public function getId(): int
     {
         return $this->id;
@@ -98,7 +104,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Task[]
+     * @return ArrayCollection|Task[]
      */
     public function getTasks()
     {
@@ -106,11 +112,27 @@ class User implements UserInterface
     }
 
     /**
-     * @param Collection|Task[] $tasks
+     * @param ArrayCollection|Task[] $tasks
      */
     public function setTasks($tasks): void
     {
         $this->tasks = $tasks;
+    }
+
+    /**
+     * @return ArrayCollection|Comment[]
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param ArrayCollection|Comment[] $comments
+     */
+    public function setComments($comments): void
+    {
+        $this->comments = $comments;
     }
 
     public function getRoles(): array

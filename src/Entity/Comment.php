@@ -2,21 +2,14 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Project
+class Comment
 {
-    public function __construct()
-    {
-        $this->tasks = new ArrayCollection();
-    }
-
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -25,14 +18,19 @@ class Project
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string")
      */
-    private $name;
+    private $text;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Task", mappedBy="project")
+     * @ORM\ManyToOne(targetEntity="Task", inversedBy="comments")
      */
-    private $tasks;
+    private $task;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="comments")
+     */
+    private $user;
 
     /**
      * @var \DateTime
@@ -51,14 +49,6 @@ class Project
     }
 
     /**
-     * @return ArrayCollection|Task[]
-     */
-    public function getTasks()
-    {
-        return $this->tasks;
-    }
-
-    /**
      * @return int
      */
     public function getId(): int
@@ -69,7 +59,7 @@ class Project
     /**
      * @param int $id
      */
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
@@ -77,17 +67,33 @@ class Project
     /**
      * @return string
      */
-    public function getName(): string
+    public function getText(): ?string
     {
-        return $this->name;
+        return $this->text;
     }
 
     /**
-     * @param string $name
+     * @param string $text
      */
-    public function setName($name): void
+    public function setText(string $text): void
     {
-        $this->name = $name;
+        $this->text = $text;
+    }
+
+    /**
+     * @return Task
+     */
+    public function getTask(): Task
+    {
+        return $this->task;
+    }
+
+    /**
+     * @param Task $task
+     */
+    public function setTask(Task $task): void
+    {
+        $this->task = $task;
     }
 
     /**
@@ -104,5 +110,21 @@ class Project
     public function setCreated(\DateTime $created): void
     {
         $this->created = $created;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user): void
+    {
+        $this->user = $user;
     }
 }

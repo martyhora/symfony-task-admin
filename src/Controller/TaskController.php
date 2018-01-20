@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Project;
 use App\Entity\Task;
+use App\Form\CommentForm;
 use App\Form\TaskForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -87,7 +89,25 @@ class TaskController extends Controller
      */
     public function detail(Request $request, Task $task): Response
     {
+        $comment = new Comment();
+        $comment->setTask($task);
+        $comment->setUser($this->getUser());
+        $form = $this->createForm(CommentForm::class, $comment);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            $em->persist($comment);
+
+            $em->flush();
+
+            return $this->redirectToRoute('taskDetail', ['id' => $task->getId()]);
+        }
+
         return $this->render('task/detail.html.twig', [
+            'form' => $form->createView(),
             'task' => $task,
         ]);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\Project;
 
@@ -39,6 +40,11 @@ class Task
     private $user;
 
     /**
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="task")
+     */
+    private $comments;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created", type="datetime")
@@ -57,7 +63,7 @@ class Task
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -73,7 +79,7 @@ class Task
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -89,13 +95,13 @@ class Task
     /**
      * @return Project
      */
-    public function getProject()
+    public function getProject(): Project
     {
         return $this->project;
     }
 
     /**
-     * @param mixed $project
+     * @param Project $project
      */
     public function setProject(Project $project): void
     {
@@ -105,7 +111,7 @@ class Task
     /**
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
@@ -137,7 +143,7 @@ class Task
     /**
      * @return User
      */
-    public function getUser()
+    public function getUser(): User
     {
         return $this->user;
     }
@@ -148,5 +154,21 @@ class Task
     public function setUser(User $user): void
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return ArrayCollection|Comment[]
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param ArrayCollection|Comment[] $comments
+     */
+    public function setComments($comments): void
+    {
+        $this->comments = $comments;
     }
 }
