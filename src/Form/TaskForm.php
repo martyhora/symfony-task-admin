@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Project;
 use App\Entity\Task;
+use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -22,6 +23,11 @@ class TaskForm extends AbstractType
             ->add('name', null, [
                 'attr' => ['autofocus' => true],
                 'label' => 'Task name',
+            ])
+            ->add('user', EntityType::class, [
+                'class' => User::class,
+                'placeholder' => '-- Choose --',
+                'choice_label' => 'username',
             ])
             ->add('project', EntityType::class, [
                 'class' => Project::class,

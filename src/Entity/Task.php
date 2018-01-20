@@ -30,9 +30,13 @@ class Task
 
     /**
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="tasks")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $project;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="users")
+     */
+    private $user;
 
     /**
      * @var \DateTime
@@ -128,5 +132,21 @@ class Task
     public function setCreated(\DateTime $created): void
     {
         $this->created = $created;
+    }
+
+    /**
+     * @return User
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(User $user): void
+    {
+        $this->user = $user;
     }
 }

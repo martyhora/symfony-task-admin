@@ -13,6 +13,7 @@
         <tr>
             <th>ID</th>
             <th>Project name</th>
+            <th>Assignee</th>
             <th>Name</th>
             <th>Created</th>
             <th>Actions</th>
@@ -21,6 +22,7 @@
             <tr>
                 <td>{{ task.id }}</td>
                 <td>{{ task.project.name }}</td>
+                <td>{{ task.user.username }}</td>
                 <td>{{ task.name }}</td>
                 <td>{{ task.created|date('j.n.Y') }}</td>
                 <td>
