@@ -25,11 +25,9 @@
                     </span>
                 </td>
                 <td>
-                    <div style="display: flex; justify-content: center">
-                        <a style="display: block; margin: 0 5px;" href={{ path('editState', { 'id': state.id }) }}>
-                            <span class="oi oi-pencil" title="Edit state" aria-hidden="true"></span>
-                        </a>
-                    </div>
+                    <a style="display: block; margin: 0 5px;" href={{ path('editState', { 'id': state.id }) }}>
+                        <span class="oi oi-pencil" title="Edit state" aria-hidden="true"></span>
+                    </a>
                 </td>
             </tr>
         {% endfor %}

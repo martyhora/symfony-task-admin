@@ -41,6 +41,7 @@ class TaskController extends Controller
 
         $task = new Task();
         $task->setProject($project);
+        $task->setUser($this->getUser());
         $form = $this->createForm(TaskForm::class, $task);
 
         $form->handleRequest($request);
