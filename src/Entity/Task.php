@@ -34,7 +34,7 @@ class Task
     private $project;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="users")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="tasks")
      */
     private $user;
 

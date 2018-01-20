@@ -10,28 +10,36 @@
     </div>
 
     <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>Project name</th>
-            <th>Assignee</th>
-            <th>Name</th>
-            <th>Created</th>
-            <th>Actions</th>
-        </tr>
-        {% for task in tasks %}
+        <thead>
             <tr>
-                <td>{{ task.id }}</td>
-                <td>{{ task.project.name }}</td>
-                <td>{{ task.user.username }}</td>
-                <td>{{ task.name }}</td>
-                <td>{{ task.created|date('j.n.Y') }}</td>
-                <td>
-                    <a href={{ path('editTask', { 'id': task.id }) }}>
-                        <span class="oi oi-pencil" title="Edit task" aria-hidden="true"></span>
-                    </a>
-                </td>
+                <th>ID</th>
+                <th>Project name</th>
+                <th>Assignee</th>
+                <th>Name</th>
+                <th>Created</th>
+                <th>Actions</th>
             </tr>
-        {% endfor %}
+        </thead>
+        <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.id }}</td>
+                    <td>
+                        <a href={{ path('taskDetail', { 'id': task.id }) }}>
+                            {{ task.name }}
+                        </a>
+                    </td>
+                    <td>{{ task.project.name }}</td>
+                    <td>{{ task.user.username }}</td>
+                    <td>{{ task.created|date('j.n.Y') }}</td>
+                    <td>
+                        <a href={{ path('editTask', { 'id': task.id }) }}>
+                            <span class="oi oi-pencil" title="Edit task" aria-hidden="true"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
 
 {% endblock %}

@@ -81,4 +81,14 @@ class TaskController extends Controller
             'project' => $task->getProject(),
         ]);
     }
+
+    /**
+     * @Route("/task/detail/{id}", requirements={"id": "\d+"}, name="taskDetail")
+     */
+    public function detail(Request $request, Task $task): Response
+    {
+        return $this->render('task/detail.html.twig', [
+            'task' => $task,
+        ]);
+    }
 }
