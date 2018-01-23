@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Project;
 use App\Entity\User;
 use App\Form\ProjectForm;
+use App\Repository\ProjectRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,11 +17,9 @@ class ProjectController extends Controller
     /**
      * @Route("/", name="project")
      */
-    public function index(): Response
+    public function index(ProjectRepository $projectRepository): Response
     {
-        $projects = $this->getDoctrine()
-                         ->getRepository(Project::class)
-                         ->findAll();
+        $projects = $projectRepository->findAll();
 
         return $this->render('project/list.html.twig', [
             'projects' => $projects

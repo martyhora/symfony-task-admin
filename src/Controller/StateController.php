@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\State;
 use App\Entity\User;
 use App\Form\StateForm;
+use App\Repository\StateRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,11 +17,9 @@ class StateController extends Controller
     /**
      * @Route("/state", name="state")
      */
-    public function index(): Response
+    public function index(StateRepository $stateRepository): Response
     {
-        $states = $this->getDoctrine()
-            ->getRepository(State::class)
-            ->findAll();
+        $states = $stateRepository->findAll();
 
         return $this->render('state/list.html.twig', [
             'states' => $states

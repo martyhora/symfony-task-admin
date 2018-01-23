@@ -7,6 +7,7 @@ use App\Entity\Project;
 use App\Entity\Task;
 use App\Form\CommentForm;
 use App\Form\TaskForm;
+use App\Repository\ProjectRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,11 +19,9 @@ class TaskController extends Controller
     /**
      * @Route("/task/{projectId}", requirements={"projectId": "\d+"}, name="task")
      */
-    public function index(int $projectId): Response
+    public function index(int $projectId, ProjectRepository $projectRepository): Response
     {
-        $project = $this->getDoctrine()
-            ->getRepository(Project::class)
-            ->find($projectId);
+        $project = $projectRepository->find($projectId);
 
         return $this->render('task/list.html.twig', [
             'tasks' => $project->getTasks(),
@@ -33,11 +32,9 @@ class TaskController extends Controller
     /**
      * @Route("/task/add/{projectId}", name="addTask")
      */
-    public function add(Request $request, int $projectId): Response
+    public function add(Request $request, int $projectId, ProjectRepository $projectRepository): Response
     {
-        $project = $this->getDoctrine()
-            ->getRepository(Project::class)
-            ->find($projectId);
+        $project = $projectRepository->find($projectId);
 
         $task = new Task();
         $task->setProject($project);
