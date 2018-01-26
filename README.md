@@ -1,6 +1,6 @@
 # Symfony Task Admin
 
-A tools for managing projects and tasks. The tasks can be assigned to users and to user defined states.
+A tool for managing projects and tasks. The tasks can be assigned to users and to user defined states.
 
 # Installation
 
